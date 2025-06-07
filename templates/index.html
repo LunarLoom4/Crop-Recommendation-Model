@@ -1,0 +1,117 @@
+<!-- Declares the document type as HTML5 -->
+<!DOCTYPE html>
+
+<!-- Opens the HTML document and sets the language to English -->
+<html lang="en">
+
+<head>
+    <!-- Sets the character encoding to UTF-8 (supports most characters from all human languages) -->
+    <meta charset="UTF-8">
+
+    <!-- Ensures the page is responsive (scales properly on phones, tablets, etc.) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Sets the title of the web page (shown on the browser tab) -->
+    <title>ML API</title>
+
+    <!-- Links to Google Fonts so you can use custom fonts in your page -->
+    <!-- "Pacifico" is a cursive-style font -->
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel="stylesheet" type="text/css">
+
+    <!-- "Arimo" is a clean sans-serif font -->
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel="stylesheet" type="text/css">
+
+    <!-- "Hind" is another sans-serif font, with a light weight (300) -->
+    <link href='https://fonts.googleapis.com/css?family=Hind:300' rel="stylesheet" type="text/css">
+
+    <!-- "Open Sans Condensed" is a narrow sans-serif font, also with a light weight (300) -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel="stylesheet" type="text/css">
+
+    <!-- Links to your own CSS file for custom styling -->
+    <!-- Flask will replace this with the actual path to 'style.css' located in your 'static' folder -->
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+</head>
+ 
+<!-- The body tag contains everything that will be shown in the main part of the web page -->
+<body>
+
+    <!-- div is a container to group elements. The class "login" is used for styling via CSS -->
+    <div class="login">
+
+        <!-- h1 is a large heading. This is the title of the web page -->
+        <h1>Crop Prediction Calculator</h1>
+
+        <!-- form collects user inputs and sends them to the server (Flask app) -->
+        <!-- action="{{ url_for('predict') }}" tells Flask to send the data to the '/predict' route -->
+        <!-- method="post" means we are sending data securely (not visible in the URL) -->
+        <form action="{{ url_for('predict') }}" method="post">
+
+            <!-- Each input box below allows the user to enter a value -->
+            <!-- type="text": it's a simple text input -->
+            <!-- name="Nitrogen": when the form is submitted, Flask will use this name to get the value -->
+            <!-- placeholder="Nitrogen": shows hint text inside the box -->
+            <!-- required="required": makes this field mandatory -->
+            <input type="text" name="Nitrogen" placeholder="Nitrogen" required="required" />
+
+            <!-- Similar input boxes for Phosphorus, Potassium, Temperature, etc. -->
+            <input type="text" name="Phosphorus" placeholder="Phosphorus" required="required" />
+            <input type="text" name="Potassium" placeholder="Potassium" required="required" />
+            <input type="text" name="Temperature" placeholder="Temperature" required="required" />
+            <input type="text" name="Humidity" placeholder="Humidity" required="required" />
+            <input type="text" name="pH" placeholder="pH" required="required" />
+            <input type="text" name="Rainfall" placeholder="Rainfall (in cm)" required="required" />
+
+            <!-- Submit button -->
+            <!-- type="submit": when clicked, sends all form data to the Flask backend -->
+            <!-- class="btn btn-primary btn-block btn-large": used for styling (probably with Bootstrap CSS) -->
+            <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+        </form>
+
+        <!-- <br><br> adds two line breaks for spacing -->
+        <br><br>
+
+        <!-- h1 is a big heading where the prediction result will be shown -->
+        <!-- id="predi" gives this element a unique identifier (useful for styling or JavaScript) -->
+        <!-- {{ Prediction_Text }} is a Flask template variable — Flask replaces this with the actual prediction result -->
+        <h1 id="predi">{{ Prediction_Text }}</h1>
+
+    </div>
+</body>
+</html>
+
+
+<!-- Can be added instead of style.css File -->
+    <!-- <style>
+        body {
+            background-image: url("../static/Farm.jpg");
+            margin-top: 100px;
+            margin-bottom: 100px;
+            margin-right: 150px;
+            margin-left: 500px;
+        }
+        h1 {
+            margin-left: 100px;
+        }
+        input{
+            width: 70%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border-bottom: 4px solid black;
+        }
+        button {
+            background-color: #4CAF50; /* Green */
+            margin: auto;
+            color: white;
+            padding: 15px 100px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-left: 170px
+        }
+        #predi{
+            margin-left: 150px;
+            color: white;
+        }
+    </style> -->
